@@ -1,78 +1,191 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gravity Sandbox</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: radial-gradient(circle at top, #0b1020, #02030a 70%);
+      color: #e6e8ff;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      overflow: hidden;
+    }
 
-<title>Choice of a god</title>
-<link rel="icon" type="image/x-icon" href="./media/icon.png">
-<html>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
-    <head>
-        <style>
-        html {
-            margin:0;
-            padding:0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;            
+    #ui {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      background: rgba(15, 20, 60, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      max-width: min(92vw, 320px);
+    }
+
+    #ui h1 {
+      font-size: 16px;
+      margin: 0 0 6px 0;
+      font-weight: 600;
+    }
+
+    #ui p {
+      font-size: 12px;
+      line-height: 1.4;
+      margin: 0 0 8px 0;
+      opacity: 0.85;
+    }
+
+    #stats {
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    .hint {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div id="ui">
+    <h1>Gravity Sandbox</h1>
+    <p>
+      Click to spawn particles. <br />
+      Hold <b>Shift</b> and click to create a gravity well. <br />
+      Scroll to change gravity strength.
+    </p>
+    <div id="stats"></div>
+  </div>
+
+  <div class="hint">Try making orbits ✨</div>
+  <canvas id="c"></canvas>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const statsEl = document.getElementById('stats');
+
+    let dpr = Math.max(1, window.devicePixelRatio || 1);
+
+    function resize() {
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    // --- Simulation ---
+    const particles = [];
+    const wells = [];
+
+    let gravityStrength = 1.0;
+    const G = 0.06; // base gravity constant
+
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function spawnParticle(x, y) {
+      const speed = rand(0.5, 2.5);
+      const angle = Math.random() * Math.PI * 2;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        r: rand(1.2, 2.2),
+        life: rand(600, 2000)
+      });
+    }
+
+    function spawnWell(x, y) {
+      wells.push({
+        x, y,
+        mass: rand(400, 900)
+      });
+    }
+
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX - rect.left);
+      const y = (e.clientY - rect.top);
+
+      if (e.shiftKey) {
+        spawnWell(x, y);
+      } else {
+        for (let i = 0; i < 25; i++) spawnParticle(x, y);
+      }
+    });
+
+    window.addEventListener('wheel', (e) => {
+      gravityStrength *= e.deltaY > 0 ? 0.9 : 1.1;
+      gravityStrength = Math.min(Math.max(gravityStrength, 0.1), 5);
+    }, { passive: true });
+
+    function step() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw wells
+      for (const w of wells) {
+        const grd = ctx.createRadialGradient(w.x, w.y, 0, w.x, w.y, 60);
+        grd.addColorStop(0, 'rgba(180,200,255,0.35)');
+        grd.addColorStop(1, 'rgba(180,200,255,0.0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(w.x, w.y, 60, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Update particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+
+        for (const w of wells) {
+          const dx = w.x - p.x;
+          const dy = w.y - p.y;
+          const distSq = dx * dx + dy * dy + 25;
+          const dist = Math.sqrt(distSq);
+          const force = (G * w.mass * gravityStrength) / distSq;
+          p.vx += (dx / dist) * force;
+          p.vy += (dy / dist) * force;
         }
 
-        body {
-            min-width: fit-content;
-            background-image: url('./media/background.jpg');
-            align-items: center;
-            margin 0;
-            padding: 0;
-       }
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life--;
 
-        h1 {
-            color: white;
-            text-align: center;
-            font-family: "Audiowide", sans-serif;
+        if (p.life <= 0 || p.x < -100 || p.y < -100 || p.x > innerWidth + 100 || p.y > innerHeight + 100) {
+          particles.splice(i, 1);
+          continue;
         }
 
-        a {
-            color: white;
-            font-family: "Audiowide", sans-serif;            
-        }
+        ctx.fillStyle = 'rgba(220,230,255,0.9)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
-        .center {
-            max-width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: #121212;
-            border-radius: 30px;
-            padding: 10px;
-        }
+      statsEl.textContent = `Particles: ${particles.length} | Wells: ${wells.length} | Gravity: ${gravityStrength.toFixed(2)}`;
 
-        .module {
-            max-width: fit-content;    
-            padding: 1rem;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            border-radius: 30px;    
-            background: linear-gradient(to bottom right,  #f7d200,  #f73500);
-            padding: 3px;
-        }
+      requestAnimationFrame(step);
+    }
 
-        .audiowide-regular {
-            font-family: "Audiowide", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        </style>
-    </head>
-    <body>
-        <h1>OneShot FanSong</h1>
-        <div class="module">
-            <div class="center">
-                <video src="./media/Choice-of-a-God.mp4" type="mp4" controls autoplay></video>
-                <br><a href="https://youtu.be/WxMv1FTaoQM">watch on youtube (By evidentlyfresh)</a>
-            </div>
-        </div>
-    </body>
+    step();
+  </script>
+</body>
 </html>
-
-
-
