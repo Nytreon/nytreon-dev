@@ -11,6 +11,8 @@ body {
     background-color: #1a1a1a;
 }
 
+
+
 .topnav {
     overflow: hidden;
     background-color: #333;
@@ -55,7 +57,7 @@ body {
 
 .credit {
     color: #818181;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
 }
@@ -70,6 +72,17 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 5px;
+}
+
+.output {
+    border: 2px solid #787878;
+    border-radius: 30px;
+    padding: 10px;
+    color: #FFFFFF;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .symbol:hover {
@@ -106,58 +119,113 @@ body {
 
         <div class="symbol" onclick="K1()">
             <p style="margin-bottom: 0;">K1</p>
-            <img width="100" height="100" src="./media/karma1-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma1-o.svg"></img>
         </div>
         <div class="symbol" onclick="K2()">
             <p style="margin-bottom: 0;">K2</p>
-            <img width="100" height="100" src="./media/karma2-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma2-o.svg"></img>
         </div>
         <div class="symbol" onclick="K3()">
             <p style="margin-bottom: 0;">K3</p>
-            <img width="100" height="100" src="./media/karma3-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma3-o.svg"></img>
         </div>
         <div class="symbol" onclick="K4()">
             <p style="margin-bottom: 0;">K4</p>
-            <img width="100" height="100" src="./media/karma4-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma4-o.svg"></img>
         </div>
         <div class="symbol" onclick="K5()">
             <p style="margin-bottom: 0;">K5</p>
-            <img width="100" height="100" src="./media/karma5-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma5-o.svg"></img>
         </div>
-        <div class="symbol" onclick="monk()">
-            <p style="margin-bottom: 0;">The Monk</p>
-            <img width="100" height="100" src="./media/monk-o.svg"></img>
+        <!--set 1-->
+        <div class="symbol" onclick="K6_1()">
+            <p style="margin-bottom: 0;">K6-1</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma6-1-o.svg"></img>
         </div>
+        <div class="symbol" onclick="K7_1()">
+            <p style="margin-bottom: 0;">K7-1</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma7-1-o.svg"></img>
+        </div>
+        <!--set 2-->
+        <div class="symbol" onclick="K6_2()">
+            <p style="margin-bottom: 0;">K6-2</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma6-2-o.svg"></img>
+        </div>
+        <div class="symbol" onclick="K7_2()">
+            <p style="margin-bottom: 0;">K7-2</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma7-2-o.svg"></img>
+        </div>
+        <div class="symbol" onclick="K8_2()">
+            <p style="margin-bottom: 0;">K8-2</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma8-2-o.svg"></img>
+        </div>
+        <!--set 3-->
+        <div class="symbol" onclick="K6_3()">
+            <p style="margin-bottom: 0;">K6-3</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma6-3-o.svg"></img>
+        </div>
+        <div class="symbol" onclick="K7_3()">
+            <p style="margin-bottom: 0;">K7-3</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma7-3-o.svg"></img>
+        </div>
+        <div class="symbol" onclick="K8_3()">
+            <p style="margin-bottom: 0;">K8-3</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma8-3-o.svg"></img>
+        </div>
+        <div class="symbol" onclick="K9_3()">
+            <p style="margin-bottom: 0;">K9-3</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma9-3-o.svg"></img>
+        </div>
+        <!--set 4-->
         <div class="symbol" onclick="K6()">
             <p style="margin-bottom: 0;">K6</p>
-            <img width="100" height="100" src="./media/karma6-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma6-o.svg"></img>
         </div>
         <div class="symbol" onclick="K7()">
             <p style="margin-bottom: 0;">K7</p>
-            <img width="100" height="100" src="./media/karma7-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma7-o.svg"></img>
         </div>
         <div class="symbol" onclick="K8()">
             <p style="margin-bottom: 0;">K8</p>
-            <img width="100" height="100" src="./media/karma8-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma8-o.svg"></img>
         </div>
         <div class="symbol" onclick="K9()">
             <p style="margin-bottom: 0;">K9</p>
-            <img width="100" height="100" src="./media/karma9-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma9-o.svg"></img>
         </div>
         <div class="symbol" onclick="K10()">
             <p style="margin-bottom: 0;">K10</p>
-            <img width="100" height="100" src="./media/karma10-o.svg"></img>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/karma10-o.svg"></img>
         </div>
-
+        <!--passages-->
+        <div class="symbol" onclick="monk()">
+            <p style="margin-bottom: 0;">The Monk</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/monk-o.svg"></img>
+        </div>
+        <div class="symbol" onclick="hunter()">
+            <p style="margin-bottom: 0;">The Hunter</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/hunter-o.svg"></img>
+        </div>
+        <div class="symbol" onclick="outlaw()">
+            <p style="margin-bottom: 0;">The Outlaw</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/outlaw-o.svg"></img>
+        </div>
+        <div class="symbol" onclick="saint()">
+            <p style="margin-bottom: 0;">The Saint</p>
+            <img width="100" height="100" src="https://nytreon.dev/rosetta/media/saint-o.svg"></img>
+        </div>
     </div>
     <br>
-    <div class="inner" id="output">
+    <div class="output" id="output">
         <h3>No symbol selected.</h1>
     </div>
 </div>
 <p class="credit">Credit to kiwi for making the SVGs</p>
 </body>
 <script>
+
+//__________________________________________________________________________________________________
+
 function setInfo(HTML) {
     if (HTML !== "") { 
         document.getElementById("output").innerHTML = HTML;
@@ -167,21 +235,48 @@ function setInfo(HTML) {
 }
 function K1() {
 
-    const htmlToSet = `<h3>Karma 1</h3>`;
+    const htmlToSet = `
+    <h3>Karma 1</h3>
+    <div class="inner">
+        <img src="https://nytreon.dev/rosetta/media/k1/plate1.png"></img>
+        <img src="https://nytreon.dev/rosetta/media/k1/karma1.png"></img>
+        <img src="https://nytreon.dev/rosetta/media/k1/aiimg1.png"></img>
+        <img src="https://nytreon.dev/rosetta/media/k1/aiimg2.png"></img>
+    <div>
+    `;
 
     setInfo(htmlToSet);
 
 }
+//karma symbols 
 function K2() {
 
-    const htmlToSet = `<h3>Karma 2</h3>`;
+    const htmlToSet = `
+    <h3>Karma 2</h3>
+    <div class="inner">
+        <img src="https://nytreon.dev/rosetta/media/k2/brainscan.png"></img>
+        <img width="400px" height="400px" src="https://nytreon.dev/rosetta/media/k2/karma2.jpg"></img>
+        <img src="https://nytreon.dev/rosetta/media/k1/aiimg2.png"></img>
+        <img src="https://nytreon.dev/rosetta/media/k2/aiimg3.png"></img>
+        <img src="https://nytreon.dev/rosetta/media/k2/plate2.png"></img>
+    <div>
+    `;
 
     setInfo(htmlToSet);
 
 }
 function K3() {
 
-    const htmlToSet = `<h3>Karma 3</h3>`;
+    const htmlToSet = `
+    <h3>Karma 3</h3>
+    <div class="inner">
+        <img src="https://nytreon.dev/rosetta/media/k3/plate3.png"></img>
+        <img src="https://nytreon.dev/rosetta/media/k1/aiimg1.png"></img>
+        <img src="https://nytreon.dev/rosetta/media/k1/aiimg2.png"></img>
+        <img src="https://nytreon.dev/rosetta/media/k3/karma3.jpg"></img>
+        <img src="https://nytreon.dev/rosetta/media/k3/scavmark.png"></img>
+    <div>
+    `;
 
     setInfo(htmlToSet);
 
@@ -200,6 +295,73 @@ function K5() {
     setInfo(htmlToSet);
 
 }
+//set 1
+function K6_1() {
+
+    const htmlToSet = `<h3>Karma 6-1</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function K7_1() {
+
+    const htmlToSet = `<h3>Karma 7-1</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+//set 2
+function K6_2() {
+
+    const htmlToSet = `<h3>Karma 6-2</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function K7_2() {
+
+    const htmlToSet = `<h3>Karma 7-2</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function K8_2() {
+
+    const htmlToSet = `<h3>Karma 8-2</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+//set 3
+function K6_3() {
+
+    const htmlToSet = `<h3>Karma 6-3</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function K7_3() {
+
+    const htmlToSet = `<h3>Karma 7-3</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function K8_3() {
+
+    const htmlToSet = `<h3>Karma 8-3</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function K9_3() {
+
+    const htmlToSet = `<h3>Karma 9-3</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+//set 4
 function K6() {
 
     const htmlToSet = `<h3>Karma 6</h3>`;
@@ -235,9 +397,31 @@ function K10() {
     setInfo(htmlToSet);
 
 }
+//passages
 function monk() {
 
     const htmlToSet = `<h3>The Monk</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function outlaw() {
+
+    const htmlToSet = `<h3>The Outlaw</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function hunter() {
+
+    const htmlToSet = `<h3>The Hunter</h3>`;
+
+    setInfo(htmlToSet);
+
+}
+function saint() {
+
+    const htmlToSet = `<h3>The Saint</h3>`;
 
     setInfo(htmlToSet);
 
